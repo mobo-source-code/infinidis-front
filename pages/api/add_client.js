@@ -1,20 +1,20 @@
+
 import axios from "axios";
-import cookie from 'cookie';
 
 export default async (req, res) => {
 
-  const {email, password} = req.body
+  const {nom, contact, adresse, tel} = req.body
   const body = {
-    email, 
-    password
+    nom, 
+    contact, 
+    adresse, 
+    tel
   }
 
   try {
-    const logdata = await axios.post('https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/login/', body)
+    const client = await axios.post('https://infinidis-maroc-api.herokuapp.com/delivery/clients/', body)
     .then(res => {return res.data})
-    const refresh = logdata.refresh_token
-    res.setHeader('Set-Cookie', cookie.serialize('refresh', refresh, {httpOnly: true, secure: false, sameSite: 'strict' , maxAge: 60*60*24, path: '/'}))
-    res.status(200).json({logdata: logdata})
+    res.status(200).json({client: client})
   } catch(error) {
     if (error.response) {
       console.error(error.response.data)

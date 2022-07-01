@@ -4,13 +4,16 @@ import { useContext, useEffect } from "react";
 import AuthContext from "../hooks/useAuth";
 import Dash from "../components/dash";
 import cookie from 'cookie';
+import axios from "axios";
 
-export default function Home({user}) {
+export default function Home({user, all_dels, clients}) {
 
-  const {setUser} = useContext(AuthContext)
+  const {setUser, setClients, setDels} = useContext(AuthContext)
 
   useEffect(() => {
     setUser(user);
+    setClients(clients);
+    setDels(all_dels)
   }, [])
 
 
@@ -30,19 +33,24 @@ export default function Home({user}) {
         <Link href="/loginpage">
           <a className="text-links text-md font-bold font-inter">Login</a>
         </Link>
-      </div> ) : ( <Dash /> )}
+      </div> ) : ( <Dash all_dels={all_dels} /> )}
     </div>
   );
 }
 
 export let getServerSideProps = async ({ req }) => {
+  const res = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
+  const delis = res.data
+  const res2 = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/clients")
+  const clients = res2.data
+  console.log(clients)
   const cookies = cookie.parse(req.headers.cookie);
   if (cookies.refresh) {
     const body = {
       refresh: cookies.refresh,
     };
     const { data } = await axios.post(
-      "http://127.0.0.1:8000/users/dj-rest-auth/token/refresh/",
+      "https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/token/refresh/",
       body
     );
     if (data && data.access) {
@@ -53,12 +61,15 @@ export let getServerSideProps = async ({ req }) => {
       };
       console.log(userConfig);
       const { data: userData } = await axios.get(
-        "http://127.0.0.1:8000/users/dj-rest-auth/user/",
+        "https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/user/",
         userConfig
       );
+      // const data = await axios.get("http://127.0.0.1:8000/delivery/deliveries")
       return {
         props: {
           user: userData,
+          all_dels: delis,
+          clients: clients
         },
       };
     }
@@ -66,6 +77,8 @@ export let getServerSideProps = async ({ req }) => {
     return {
       props: {
         user: null,
+        all_dels: delis,
+        clients: clients
       },
     };
   }

@@ -9,12 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@heroicons/react": "^1.0.6",
+    "@material-tailwind/react": "^1.0.4",
+    "@mui/lab": "^5.0.0-alpha.86",
+    "@mui/material": "^5.8.4",
+    "@tailwindcss/forms": "^0.5.2",
     "axios": "^0.27.2",
+    "classnames": "^2.3.1",
     "cookie": "^0.5.0",
     "flowbite-react": "^0.0.25",
+    "moment": "^2.29.3",
+    "moment-range": "^4.0.2",
     "next": "12.1.6",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-calendar": "^3.7.0",
+    "react-datepicker": "^4.8.0",
+    "react-daterange-picker": "^2.0.1",
+    "react-dom": "18.1.0",
+    "react-icons": "^4.4.0",
+    "react-table": "^7.8.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

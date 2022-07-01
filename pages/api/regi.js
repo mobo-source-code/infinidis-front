@@ -10,7 +10,7 @@ export default async (req, res) => {
   }
 
   try {
-    const regdata = await axios.post('http://127.0.0.1:8000/users/dj-rest-auth/registration/', body)
+    const regdata = await axios.post('https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/registration/', body)
     .then(res => {return res.data})
     res.status(200).json({regresponse: regdata})
   } catch(error) {
