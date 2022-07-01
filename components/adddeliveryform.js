@@ -41,7 +41,7 @@ const AddDeliveryForm = ({clients}) => {
                 <select value={destinataire} onChange={e => setDesti(parseInt(e.target.value))}
                     name="destinataire" className="mt-1 w-48 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     {clients.map( client => (
-                        <option value={client.id}>{client.nom}</option>
+                        <option key={clien.id} value={client.id}>{client.nom}</option>
                     ))}
                 </select>
                 </span>

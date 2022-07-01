@@ -9,7 +9,7 @@ const AddDeliveryComponent = ({clients}) => {
                 </h1>
                 <p className="text-sm font-normal font-source text-gray-800 w-2/3">
                     Ajouter vos livraisons en remplissant les champs ci dessous, vous pouvez toujours 
-                    modifier une livraison en cas d'erreur, et vous serez notifié lors du succès d'un ajout 
+                    modifier une livraison si une erreur apparait, et vous serez notifié lors du succès de ajout 
                 </p>
                 <AddDeliveryForm clients={clients} />
         </div>
