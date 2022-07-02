@@ -44,7 +44,11 @@ export let getServerSideProps = async ({ req }) => {
   const res2 = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/clients")
   const clients = res2.data
   console.log(clients)
-  const cookies = cookie.parse(req.headers.cookie);
+  let cook = req.headers.cookie;
+  if (typeof cook !== 'string') {
+    cook = '';
+  }
+  let cookies = parse(req.headers.cookie) 
   if (cookies.refresh) {
     const body = {
       refresh: cookies.refresh,
@@ -77,7 +81,7 @@ export let getServerSideProps = async ({ req }) => {
   } else {
     return {
       props: {
-        user: [],
+        user: null,
         all_dels: delis,
         clients: clients
       },
