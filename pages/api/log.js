@@ -14,7 +14,7 @@ export default async (req, res) => {
     .then(res => {return res.data})
     console.log(data.refresh_token)
     const refresh = data.refresh_token
-    res.setHeader('Set-Cookie', cookie.serialize('refresh', refresh, {httpOnly: false, secure: true, sameSite: 'strict' , maxAge: 60*60*24, path: '/'}))
+    res.setHeader('Set-Cookie', cookie.serialize('refresh', refresh, {httpOnly: true, secure: true, sameSite: 'None' , maxAge: 60*60*24, path: '/'}))
     res.status(200).json({refresh: data.refresh_token})
   } catch(error) {
     if (error.response) {
