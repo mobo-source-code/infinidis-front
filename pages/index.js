@@ -64,7 +64,7 @@ export let getServerSideProps = async ({ req }) => {
         "https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/user/",
         userConfig
       );
-      // const data = await axios.get("http://127.0.0.1:8000/delivery/deliveries")
+      const data = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
       return {
         props: {
           user: userData,
