@@ -77,7 +77,7 @@ export let getServerSideProps = async ({ req }) => {
   } else {
     return {
       props: {
-        user: null,
+        user: [],
         all_dels: delis,
         clients: clients
       },

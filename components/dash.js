@@ -94,13 +94,3 @@ const Dash = ({all_dels}) => {
 
 
 export default Dash;
-
-export async function getServerSideProps() {
-  const res = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
-  const dels = res.data
-    return {
-      props: {
-        all_dels: dels
-      }
-    }
-}
