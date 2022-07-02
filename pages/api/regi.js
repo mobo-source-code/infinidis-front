@@ -8,11 +8,12 @@ export default async (req, res) => {
     password1,
     password2
   }
-
+  console.log("connected")
   try {
-    const regdata = await axios.post('https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/registration/', body)
+    const data = await axios.post('https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/registration/', body)
     .then(res => {return res.data})
-    res.status(200).json({regresponse: regdata})
+    console.log(data.refresh_token)
+    res.status(200).json({regresponse: data.refresh_token})
   } catch(error) {
     if (error.response) {
       console.error(error.response.data)
@@ -26,4 +27,5 @@ export default async (req, res) => {
     }
     return res.status(500).json({message: "Something went wrong"})
   }
+
 }

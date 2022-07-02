@@ -96,6 +96,11 @@ const Dash = ({all_dels}) => {
 export default Dash;
 
 export async function getServerSideProps() {
-  const res = await axios.get("http://127.0.0.1:8000/delivery/deliveries")
-  console.log(res.data)
+  const res = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
+  const dels = res.data
+    return {
+      props: {
+        all_dels: dels
+      }
+    }
 }

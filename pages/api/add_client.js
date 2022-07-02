@@ -10,11 +10,12 @@ export default async (req, res) => {
     adresse, 
     tel
   }
-
+  console.log("connected")
   try {
-    const client = await axios.post('https://infinidis-maroc-api.herokuapp.com/delivery/clients/', body)
+    const data = await axios.post('https://infinidis-maroc-api.herokuapp.com/delivery/clients/', body)
     .then(res => {return res.data})
-    res.status(200).json({client: client})
+    console.log(data)
+    res.status(200).json({client: data})
   } catch(error) {
     if (error.response) {
       console.error(error.response.data)

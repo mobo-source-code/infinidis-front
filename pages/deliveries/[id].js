@@ -2,7 +2,7 @@ import axios from "axios";
 import Image from "next/image";
 
 export const getStaticPaths = async () => {
-    const res = await axios.get("http://127.0.0.1:8000/delivery/deliveries")
+    const res = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
     const data = res.data
 
     const paths = data.map(del => {
@@ -19,11 +19,12 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     const id = context.params.id;
-    const res = await axios.get(`http://127.0.0.1:8000/delivery/deliveries/${id}`)
+    const res = await axios.get(`https://infinidis-maroc-api.herokuapp.com/delivery/deliveries/${id}`)
     const data = res.data
+    console.log(data)
 
     return {
-        props: {del : data}
+        props: {del: data}
     }
 }
 

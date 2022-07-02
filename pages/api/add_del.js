@@ -10,11 +10,12 @@ export default async (req, res) => {
     nombre_de_colis, 
     type_de_paiment
   }
-
+  console.log("connected")
   try {
-    const client = await axios.post('https://infinidis-maroc-api.herokuapp.com/delivery/deliveries/', body)
+    const data = await axios.post('https://infinidis-maroc-api.herokuapp.com/delivery/deliveries/', body)
     .then(res => {return res.data})
-    res.status(200).json({client: client})
+    console.log(data)
+    res.status(200).json({del: data})
   } catch(error) {
     if (error.response) {
       console.error(error.response.data)
