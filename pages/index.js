@@ -78,8 +78,8 @@ export let getServerSideProps = async ({ req }) => {
     return {
       props: {
         user: null,
-        all_dels: null,
-        clients: null
+        all_dels: delis,
+        clients: clients
       },
     };
   } 
