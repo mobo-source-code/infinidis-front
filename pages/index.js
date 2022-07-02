@@ -48,7 +48,7 @@ export let getServerSideProps = async ({ req }) => {
   if (typeof cook !== 'string') {
     cook = '';
   }
-  let cookies = parse(req.headers.cookie) 
+  let cookies = cookie.parse(cook) 
   if (cookies.refresh) {
     const body = {
       refresh: cookies.refresh,
