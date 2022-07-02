@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) => {
     const router = useRouter()
 
     const toLogin = async({email, password}) => {
-        const res = await axios.post('http://localhost:3000/api/log', {email, password})
+        const res = await axios.post('https://infinidis-front-front.vercel.app/api/log', {email, password})
         const logdata = res.data
         if (logdata) {
             console.log(logdata)
@@ -23,7 +23,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const toRegister = async({email, password1, password2}) => {
-        const res = await axios.post('http://localhost:3000/api/regi', {email, password1, password2})
+        const res = await axios.post('https://infinidis-front-front.vercel.app/api/regi', {email, password1, password2})
         console.log(res)
         const logData = {
             email: email,
@@ -33,13 +33,13 @@ export const AuthProvider = ({children}) => {
     }
     
     const toLogout = async () => {
-        await axios.post('http://localhost:3000/api/logout')
+        await axios.post('https://infinidis-front-front.vercel.app/api/logout')
         setUser(null)
         router.push('/')
     }
 
     const toAddDelivery = async ({num_facture, destinataire, bon_de_livraison, nombre_de_colis, type_de_paiment}) => {
-        const res = await axios.post('http://localhost:3000/api/add_del', {num_facture, destinataire, bon_de_livraison, nombre_de_colis, type_de_paiment})
+        const res = await axios.post('https://infinidis-front-front.vercel.app/api/add_del', {num_facture, destinataire, bon_de_livraison, nombre_de_colis, type_de_paiment})
         console.log(res.data)
         router.push('/')
         console.log("connected")
@@ -47,7 +47,7 @@ export const AuthProvider = ({children}) => {
 
 
     const toAddClient = async ({nom, contact, adresse, tel}) => {
-        const res = await axios.post('http://localhost:3000/api/add_client', {nom, contact, adresse, tel})
+        const res = await axios.post('https://infinidis-front-front.vercel.app/api/add_client', {nom, contact, adresse, tel})
         console.log(res.data)
         router.push('/clientlistpage')
         console.log("connected")
