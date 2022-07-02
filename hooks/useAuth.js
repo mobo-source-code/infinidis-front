@@ -14,10 +14,10 @@ export const AuthProvider = ({children}) => {
 
     const toLogin = async({email, password}) => {
         const res = await axios.post('http://localhost:3000/api/log', {email, password})
-        console.log(res.data.logdata)
         const logdata = res.data
-        if ({logdata}) {
-            setUser(logdata.user)
+        if (logdata) {
+            console.log(logdata)
+            setUser(logdata)
             router.push('/')
         }     
     }

@@ -49,11 +49,12 @@ export let getServerSideProps = async ({ req }) => {
     const body = {
       refresh: cookies.refresh,
     };
-    const { data } = await axios.post(
+    const {data}  = await axios.post(
       "https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/token/refresh/",
       body
     );
     if (data && data.access) {
+      console.log(data)
       const userConfig = {
         headers: {
           Authorization: "Bearer " + data.access,
@@ -64,7 +65,7 @@ export let getServerSideProps = async ({ req }) => {
         "https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/user/",
         userConfig
       );
-      const data = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
+      console.log(userData)
       return {
         props: {
           user: userData,
@@ -72,19 +73,13 @@ export let getServerSideProps = async ({ req }) => {
           clients: clients
         },
       };
-    }
+    } 
   } else {
     return {
-      props: {
-        user: null,
-        all_dels: delis,
-        clients: clients
-      },
+      redirect: {
+        destination: '/loginpage',
+        statusCode: 307
+      }
     };
-  }
-  // return {
-  //   props: {
-  //     user: userData
-  //   },
-  // }
+  } 
 };
