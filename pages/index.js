@@ -53,7 +53,7 @@ export let getServerSideProps = async ({ req }) => {
       "https://infinidis-maroc-api.herokuapp.com/users/dj-rest-auth/token/refresh/",
       body
     );
-    if (data && data.access) {
+    if ({data} && data.access) {
       console.log(data)
       const userConfig = {
         headers: {
@@ -76,10 +76,11 @@ export let getServerSideProps = async ({ req }) => {
     } 
   } else {
     return {
-      redirect: {
-        destination: '/loginpage',
-        statusCode: 307
-      }
+      props: {
+        user: null,
+        all_dels: null,
+        clients: null
+      },
     };
   } 
 };
