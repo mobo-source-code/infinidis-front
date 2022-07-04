@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import AuthContext from "../hooks/useAuth";
+import Link from "next/link";
 
 const Picker = ({delis}) => {
 
@@ -57,12 +58,14 @@ const Picker = ({delis}) => {
                     </thead>
                     <tbody className="border-b bg-gray-100 border-slate-400">
                         {result.length ? result.map( r => (
-                        <tr>
+                        <Link href={`/deliveries/${r.id}`}>
+                        <tr className="cursor-pointer hover:bg-white">
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{r.num_facture}</td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{r.destinataire}</td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{r.status}</td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{r.creer_le}</td>
                         </tr>
+                        </Link>
                         )) : <tr>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">les résultats</td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">seront</td>

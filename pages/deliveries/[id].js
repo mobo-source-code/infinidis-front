@@ -1,5 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
+import jsPDF from "jspdf"
+import ReactDOMServer from "react-dom/server"
 
 export const getStaticPaths = async () => {
     const res = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
@@ -28,13 +30,22 @@ export const getStaticProps = async (context) => {
     }
 }
 
+const generatePDF = () => {
+    var doc = new jsPDF("p", "pt", "a4");
+    doc.html(ReactDOMServer.renderToString(document.querySelector("content")), {
+        callback: function(pdf) {
+            pdf.save("Ticket.pdf")
+        }
+    })
+}
+
 const DeliveryDetail = ({del}) => {
 
     return (
-        <div className="flex flex-col h-screen justify-center items-center space-y-2 text-blue-800">
+        <div id="content" className="flex flex-col h-screen justify-center items-center space-y-2 text-blue-800">
             <div className="w-3/4 flex flex-col space-y-2">
             <div className="flex space-x-5">
-                <div className="border-2 border-blue-500 rounded-lg flex p-4 space-x-2">
+                <div className="border-2 border-blue-500 rounded-lg flex p-4 space-x-5">
                     <Image src="https://treurgia.sirv.com/infinidis/logoinf1.png" height={36} width={84} />
                     <div className="flex flex-col space-y-2">
                         <p className="font-bold text-xs font-source">Groupe Y Rue 45 N° 11/13</p>
@@ -72,18 +83,18 @@ const DeliveryDetail = ({del}) => {
                     <p className="font-source text-xs font-bold">CIN:......................................................................</p>
                 </div>
             </div>
-            <div className="flex space-x-32">
-                <div className="p-4 justify-center items-center border-2 border-blue-500 rounded-lg">
+            <div className="flex space-x-28">
+                <div className="p-5 justify-center items-center border-2 border-blue-500 rounded-lg">
                     <p className="font-bold text-md font-source">Retour de fond :</p>
                 </div>
-                <div className="p-4 justify-center items-center border-2 border-blue-500 rounded-lg">
+                <div className="p-5 justify-center items-center border-2 border-blue-500 rounded-lg">
                     <p className="font-bold text-md font-source">Nbre de Colis : </p>
                 </div>
-                <div className="p-4 justify-center items-center border-2 border-blue-500 rounded-lg">
+                <div className="p-5 justify-center items-center border-2 border-blue-500 rounded-lg">
                     <p className="font-bold text-md font-source">N° CIN: </p>
                 </div>
             </div>
-            <div className="flex space-x-20">
+            <div className="flex space-x-28">
             <div className="p-4 justify-center items-center border-2 border-blue-500 rounded-lg">
                     <p className="font-bold text-md font-source h-28">Signature et Cachet expéditeur :</p>
                 </div>
@@ -92,10 +103,14 @@ const DeliveryDetail = ({del}) => {
                 </div>
             </div>
             </div>
-            
+            <button onClick={generatePDF} type="submit" className="w-40 h-10 px-4 py-0 tracking-wide text-white transition-colors duration-200 transform bg-button rounded hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        Télécharger
+            </button>
         </div>
     )
 }
+
+
 
 export default DeliveryDetail;
 
