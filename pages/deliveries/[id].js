@@ -2,7 +2,6 @@ import axios from "axios";
 import Image from "next/image";
 import jsPDF from "jspdf"
 import ReactDOMServer from "react-dom/server"
-import fs from "fs"
 
 export const getStaticPaths = async () => {
     const res = await axios.get("https://infinidis-maroc-api.herokuapp.com/delivery/deliveries")
